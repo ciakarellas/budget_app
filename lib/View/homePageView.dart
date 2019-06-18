@@ -6,9 +6,9 @@ class MyHomePage extends StatelessWidget{
     // TODO: implement build
     return MaterialApp(
       home: Scaffold(
-        body: Center(
+        body: Container(
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text('152,03',style: 
                   TextStyle(
@@ -16,10 +16,13 @@ class MyHomePage extends StatelessWidget{
                     fontFamily: 'Aleo Light'
                   ),
                 ),
-              TextFormField(
-                style: TextStyle(),
-                keyboardType: TextInputType.number,
-                )
+              Padding(
+                padding:EdgeInsets.fromLTRB(0, 200, 0, 70),
+                  child: TextFormField(
+                    style: TextStyle(),
+                    keyboardType: TextInputType.number,
+                ),
+              )
             ],
           ),
        ),

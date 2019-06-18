@@ -8,8 +8,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Aleo Light'),
       title: 'Budget App',
-      home: MyHomePage(),
+      home: MyHomePage(
+        
+      ),
     );
   }
 }
