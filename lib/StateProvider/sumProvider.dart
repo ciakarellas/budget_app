@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class SumState extends ChangeNotifier {
-  int _sum = 0;
+  double _sum = 0;
 
-  int get sum => _sum;
+  double get sum => _sum;
 
-  set sum(int sumEdit) {
+  set sum(double sumEdit) {
     _sum = sumEdit;
     notifyListeners();
   }
 
-  void sumIncrement() {
-    _sum = _sum + 2;
+  void sumIncrement(String amount) {
+    
+    _sum  += double.parse(amount);
     notifyListeners();
   }
 }
