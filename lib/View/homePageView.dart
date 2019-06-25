@@ -1,31 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class MyHomePage extends StatelessWidget{
+import '../StateProvider/sumProvider.dart';
+
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text('152,03',style: 
-                  TextStyle(
-                    fontSize: 30,
-                    fontFamily: 'Aleo Light'
-                  ),
-                ),
-              Padding(
-                padding:EdgeInsets.fromLTRB(0, 200, 0, 70),
-                  child: TextFormField(
-                    style: TextStyle(),
-                    keyboardType: TextInputType.number,
-                ),
-              )
-            ],
+
+    final sum = Provider.of<SumState>(context);
+
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          Container(
+            child: Consumer<SumState>(
+              builder: (context, sum, child) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      sum.sum.toString(),
+                      style: TextStyle(fontSize: 30, fontFamily: 'Aleo Light'),
+                    ),
+                    new RaisedButton(
+                        child: Text('dodaj'),
+                        onPressed: () {
+                          sum.sumIncrement();
+                        }),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(60, 200, 60, 70),
+                      child: TextFormField(
+                        style: TextStyle(),
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
-       ),
+        ],
       ),
     );
   }
