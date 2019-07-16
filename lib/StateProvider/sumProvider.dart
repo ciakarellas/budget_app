@@ -4,9 +4,7 @@ import 'package:flutter/foundation.dart';
 import '../models/bill.dart';
 
 class SumState extends ChangeNotifier {
-  double _sum = 0;
   
-
   Bill _newBill = new Bill(1.0 ,DateTime.now(), '_sum' );
 
   double get sum => _sum;
