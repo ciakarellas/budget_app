@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../StateProvider/sumProvider.dart';
@@ -6,13 +8,15 @@ import '../StateProvider/sumProvider.dart';
 class MyHomePage extends StatelessWidget {
 
  TextEditingController _sumController = new TextEditingController();
+ //TO DO
+ //obejrzec video na YT. Dodać liste do providera która bede mmodyfikował potem jako rozszerzenie
  
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
 
     final sum = Provider.of<SumState>(context);
-
+   
     return Scaffold(
       body: SafeArea(
         child:SingleChildScrollView(
@@ -31,21 +35,26 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(60, 200, 60, 20),
-                      child: TextFormField(
+                      padding: const EdgeInsets.only(top:100),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: 180,
+                            child: TextFormField(
                               controller: _sumController,
                               style: TextStyle(),
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.datetime,
                               decoration: InputDecoration()
                             ),
                           ),
-                    FlatButton(
-                      onPressed: (){
-                        sum.sumIncrement(_sumController.text);
-                        _sumController.text= ''; 
-                      },
-                      child: Text('tap'),
+                          DropdownButton(
+                            items: ,
+                          ),
+                        ],
+                      ),
                     ),
+                    
                   ],
                 ),
                 );
