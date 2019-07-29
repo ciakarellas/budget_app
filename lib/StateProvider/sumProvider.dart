@@ -5,11 +5,13 @@ import '../models/bill.dart';
 
 class SumState extends ChangeNotifier {
 
-  var _sum;
-  
-  Bill _newBill = new Bill(1.0 ,DateTime.now(), '_sum' );
+  double _sum;
+  List<Map<Bill, Object>> _bills = [{}];
+  List<String> _category = ['Codzienne', 'Na mieście'];
 
   double get sum => _sum;
+
+  get category => _category;
 
   set sum(double sumEdit) {
     _sum = sumEdit;

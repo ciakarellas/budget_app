@@ -49,7 +49,13 @@ class MyHomePage extends StatelessWidget {
                             ),
                           ),
                           DropdownButton(
-                            items: ,
+                            items: sum.category.map((String newCategory){
+                              return DropdownMenuItem<String>(
+                                value: newCategory,
+                                child: Text(newCategory),
+                              );
+                            }).toList(),
+                            onChanged: (x){},
                           ),
                         ],
                       ),
