@@ -5,7 +5,6 @@ class Bill{
   String comment, category;
   double price;
   DateTime time;
-  List<String> categ = ['wydatki', 'jedzenie'];
 
   Bill(this.price, this.time, this.category );
 }

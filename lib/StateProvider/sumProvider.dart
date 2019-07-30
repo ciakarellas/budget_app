@@ -7,7 +7,7 @@ class SumState extends ChangeNotifier {
 
   double _sum;
   List<Map<Bill, Object>> _bills = [{}];
-  List<String> _category = ['Codzienne', 'Na mieście'];
+  var _category = ['Codzienne', 'Na mieście'];
 
   double get sum => _sum;
 
