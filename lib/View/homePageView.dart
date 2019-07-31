@@ -55,7 +55,10 @@ class MyHomePage extends StatelessWidget {
                                 child: Text(newCategory),
                               );
                             }).toList(),
-                            onChanged: (x){},
+                            onChanged: (category){
+                              sum.selectedCategory = category;
+                            },
+                            value: sum.selectedCategory,
                           ),
                         ],
                       ),
