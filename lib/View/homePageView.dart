@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../StateProvider/sumProvider.dart';
+import '../models/bill.dart';
 
 class MyHomePage extends StatelessWidget {
 
@@ -63,7 +64,13 @@ class MyHomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    
+                    FlatButton(
+                      child: Icon(Icons.add),
+                      onPressed: (){
+                        var newbill = _sumController;
+                        sum.bills(new Bill(newbill, sum.selectedCategory));
+                      },
+                    )
                   ],
                 ),
                 );
