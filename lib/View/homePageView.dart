@@ -11,7 +11,8 @@ class MyHomePage extends StatelessWidget {
  TextEditingController _sumController = new TextEditingController();
  //TO DO
  //obejrzec video na YT. Dodać liste do providera która bede mmodyfikował potem jako rozszerzenie
- 
+  
+  
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -67,8 +68,15 @@ class MyHomePage extends StatelessWidget {
                     FlatButton(
                       child: Icon(Icons.add),
                       onPressed: (){
-                        var newbill = _sumController;
-                        sum.bills(new Bill(newbill, sum.selectedCategory));
+                        var userBill = _sumController.text;
+                        final newBill = new Bill(userBill, sum.selectedCategory);
+                        sum.bills(newBill);
+                        
+                        /*AlertDialog(
+                          actions: <Widget>[
+                            Text('Cena $sum.bill[0].price')
+                          ],
+                        );*/
                       },
                     )
                   ],

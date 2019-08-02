@@ -18,14 +18,21 @@ class SumState extends ChangeNotifier {
   }
 
   //History of Bills
-  List<Map<Bill, Object>> _bills = [{}];
-  
+  //List<Map<Bill, Object>> _bills = [{}];
+  List _bills = [];
   get bills => _bills;
-  set bills(bill){
-    _bills.add(bill);
+  set bills(Bill bill){
+    _bills[0] = bill;
     notifyListeners();
   }
 
+  // Amount
+  String _amount = '';
+  get amount =>_amount;
+  set amount(amount){
+    _amount = amount;
+    notifyListeners();
+  }
   //Summing Bills
    double _sum;
   set sum(double sumEdit) {
