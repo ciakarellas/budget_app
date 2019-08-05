@@ -68,7 +68,8 @@ class MyHomePage extends StatelessWidget {
                     FlatButton(
                       child: Icon(Icons.add),
                       onPressed: (){
-                        final newBill = new Bill(_sumController.text, sum.selectedCategory);
+                        final amount = double.parse(_sumController.text);
+                        final newBill = new Bill(amount, sum.selectedCategory);
                         sum.addBill(newBill);
                         //sum.sumOfBill();
                         _sumController.clear();

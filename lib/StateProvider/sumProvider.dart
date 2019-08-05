@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:collection';
 
 import '../models/bill.dart';
 
@@ -38,17 +37,9 @@ class SumState extends ChangeNotifier {
   double _sum = 0;
   get sum => _sum;
   set sum(bill){
-    bill.map((x){
-      _sum = _sum + double.parse(x.price);
-    });
+    _sum = _bills.fold(0,(sum, bill) => sum + bill.price);
     notifyListeners();
   }
-  void sumOfBill() {
-    double currentSum;
-    _bills.map((x){
-      sum(double.parse(x.price));
-    });
-    notifyListeners();
-  }
+
   
 }
