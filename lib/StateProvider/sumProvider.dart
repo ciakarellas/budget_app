@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:collection';
 
 import '../models/bill.dart';
 
@@ -19,10 +20,10 @@ class SumState extends ChangeNotifier {
 
   //History of Bills
   //List<Map<Bill, Object>> _bills = [{}];
-  List _bills = [];
+  final List<Bill> _bills = [];
   get bills => _bills;
-  set bills(Bill bill){
-    _bills[0] = bill;
+  void addBill(Bill bill){
+    _bills.add(bill);
     notifyListeners();
   }
 
@@ -34,17 +35,20 @@ class SumState extends ChangeNotifier {
     notifyListeners();
   }
   //Summing Bills
-   double _sum;
-  set sum(double sumEdit) {
-    _sum = sumEdit;
+  double _sum = 0;
+  get sum => _sum;
+  set sum(bill){
+    bill.map((x){
+      _sum = _sum + double.parse(x.price);
+    });
+    notifyListeners();
+  }
+  void sumOfBill() {
+    double currentSum;
+    _bills.map((x){
+      sum(double.parse(x.price));
+    });
     notifyListeners();
   }
   
-  void sumIncrement(String amount) {
-    
-    _sum  += double.parse(amount);
-    notifyListeners();
-  }
-  
-  double get sum => _sum;
 }

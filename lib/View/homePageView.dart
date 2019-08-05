@@ -68,15 +68,11 @@ class MyHomePage extends StatelessWidget {
                     FlatButton(
                       child: Icon(Icons.add),
                       onPressed: (){
-                        var userBill = _sumController.text;
-                        final newBill = new Bill(userBill, sum.selectedCategory);
-                        sum.bills(newBill);
-                        
-                        /*AlertDialog(
-                          actions: <Widget>[
-                            Text('Cena $sum.bill[0].price')
-                          ],
-                        );*/
+                        final newBill = new Bill(_sumController.text, sum.selectedCategory);
+                        sum.addBill(newBill);
+                        //sum.sumOfBill();
+                        _sumController.clear();
+                        //print('cena ${sum.bills[0].price}');
                       },
                     )
                   ],
