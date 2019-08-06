@@ -36,7 +36,7 @@ class SumState extends ChangeNotifier {
   //Summing Bills
   double _sum = 0;
   get sum => _sum;
-  set sum(bill){
+  void sumOfBill(){
     _sum = _bills.fold(0,(sum, bill) => sum + bill.price);
     notifyListeners();
   }
