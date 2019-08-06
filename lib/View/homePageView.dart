@@ -71,12 +71,7 @@ class MyHomePage extends StatelessWidget {
                         final amount = double.parse(_sumController.text);
                         final newBill = new Bill(amount, sum.selectedCategory);
                         sum.addBill(newBill);
-<<<<<<< HEAD
-                        var newSum = 15;//sum.bills.fold(0,(sum, bill) => sum + bill.price);
-                        sum.sum(newSum);
-=======
                         sum.sumOfBill();
->>>>>>> d88674cd157f71f7d106828837ff4ad4b76c68c1
                         _sumController.clear();
                         //pr('cena ${sum.bills[0].price}');
                       },
