@@ -26,18 +26,11 @@ class SumState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Amount
-  String _amount = '';
-  get amount =>_amount;
-  set amount(amount){
-    _amount = amount;
-    notifyListeners();
-  }
   //Summing Bills
   double _sum = 0;
   get sum => _sum;
-  set sum(bill){
-    _sum = _bills.fold(0,(sum, bill) => sum + bill.price);
+  set sum(double newSum){
+    _sum = newSum;
     notifyListeners();
   }
 
