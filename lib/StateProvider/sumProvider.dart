@@ -19,7 +19,7 @@ class SumState extends ChangeNotifier {
 
   //History of Bills
   //List<Map<Bill, Object>> _bills = [{}];
-  final List<Bill> _bills = [];
+  final List<Bill> _bills = [Bill(9.0,'cos')];
   get bills => _bills;
   void addBill(Bill bill){
     _bills.add(bill);

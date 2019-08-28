@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../StateProvider/sumProvider.dart';
 import '../models/bill.dart';
+import '../widgets/billList.dart';
 
 class MyHomePage extends StatelessWidget {
 
@@ -73,9 +74,13 @@ class MyHomePage extends StatelessWidget {
                         sum.addBill(newBill);
                         sum.sumOfBill();
                         _sumController.clear();
-                        //pr('cena ${sum.bills[0].price}');
                       },
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top:100),
+                      //TODO: dodać jeszcze widget do tworzenia listy moze to pomoe na ten error
+                      child:BillList(sum.bills)
+                    ),
                   ],
                 ),
                 );
