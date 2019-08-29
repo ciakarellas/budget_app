@@ -11,8 +11,20 @@ class BillListItem extends StatelessWidget {
 
   @override
   Widget build(context){
-    return new Card(
-      child: Text(bill.category),
-    );
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: Text(bill.category),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: Text(bill.price.toString()),
+            ),
+          ],
+        )
+      );
   }
 }

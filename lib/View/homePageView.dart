@@ -77,8 +77,7 @@ class MyHomePage extends StatelessWidget {
                       },
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top:100),
-                      //TODO: dodać jeszcze widget do tworzenia listy moze to pomoe na ten error
+                      padding: const EdgeInsets.only(top:40),
                       child:BillList(sum.bills)
                     ),
                   ],
