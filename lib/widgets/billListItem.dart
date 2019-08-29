@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
 import '../models/bill.dart';
-//import '../StateProvider/sumProvider.dart';
+import '../StateProvider/sumProvider.dart';
 
 class BillListItem extends StatelessWidget {
   final Bill bill;
@@ -22,6 +22,15 @@ class BillListItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
               child: Text(bill.price.toString()),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: FlatButton(
+                child:Icon(Icons.edit),
+                onPressed: (){
+                  Provider.of<SumState>(context, listen: false).deleteBill(bill);
+                }
+              ),
             ),
           ],
         )

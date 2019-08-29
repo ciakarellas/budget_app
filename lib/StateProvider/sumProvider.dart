@@ -17,11 +17,16 @@ class SumState extends ChangeNotifier {
     notifyListeners();
   }
 
-  //History of Bills
+  //List of Bills
   final List<Bill> _bills = [];
   get bills => _bills;
   void addBill(Bill bill){
     _bills.add(bill);
+    notifyListeners();
+  }
+
+  void deleteBill(Bill bill){
+    _bills.remove(bill);
     notifyListeners();
   }
 
