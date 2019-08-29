@@ -27,6 +27,7 @@ class SumState extends ChangeNotifier {
 
   void deleteBill(Bill bill){
     _bills.remove(bill);
+    this.sumOfBill();
     notifyListeners();
   }
 
