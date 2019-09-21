@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>902315102765-4uclqd5v1svmfeagj99ji0iltd51cilh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.902315102765-4uclqd5v1svmfeagj99ji0iltd51cilh</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBYhcP_1C83gfakSHF7pVknciqRNw1hgjA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>902315102765</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.budgetApp</string>
+	<key>PROJECT_ID</key>
+	<string>budgetapp-63f92</string>
+	<key>STORAGE_BUCKET</key>
+	<string>budgetapp-63f92.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:902315102765:ios:5be6b956927324ff89dea4</string>
+	<key>DATABASE_URL</key>
+	<string>https://budgetapp-63f92.firebaseio.com</string>
+</dict>
+</plist>

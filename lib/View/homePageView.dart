@@ -7,6 +7,10 @@ import '../StateProvider/sumProvider.dart';
 import '../models/bill.dart';
 import '../widgets/billList.dart';
 
+import 'package:firebase_database/firebase_database.dart';
+
+final FirebaseDatabase database = FirebaseDatabase.instance;
+
 class MyHomePage extends StatelessWidget {
 
  TextEditingController _sumController = new TextEditingController();
@@ -74,6 +78,12 @@ class MyHomePage extends StatelessWidget {
                         sum.addBill(newBill);
                         sum.sumOfBill();
                         _sumController.clear();
+                      },
+                    ),
+                    FlatButton(
+                      child: Icon(Icons.cloud),
+                      onPressed: (){
+                        database.reference().child("billing").set({"price": 3.2});
                       },
                     ),
                     Padding(
