@@ -30,7 +30,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   moor_generator: ^1.7.1
-  build_runner:
+  build_runner: ^1.7.1
 
 
 # For information on the generic Dart part of this file, see the
