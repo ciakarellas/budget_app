@@ -7,24 +7,23 @@ part of 'data.dart';
 // **************************************************************************
 
 // ignore_for_file: unnecessary_brace_in_string_interps
-class BillTabelData extends DataClass implements Insertable<BillTabelData> {
+class Bill extends DataClass implements Insertable<Bill> {
   final int id;
   final String category;
   final String comment;
   final DateTime datatime;
-  BillTabelData(
+  Bill(
       {@required this.id,
       @required this.category,
       @required this.comment,
       this.datatime});
-  factory BillTabelData.fromData(
-      Map<String, dynamic> data, GeneratedDatabase db,
+  factory Bill.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
     final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    return BillTabelData(
+    return Bill(
       id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       category: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}category']),
@@ -34,9 +33,9 @@ class BillTabelData extends DataClass implements Insertable<BillTabelData> {
           .mapFromDatabaseResponse(data['${effectivePrefix}datatime']),
     );
   }
-  factory BillTabelData.fromJson(Map<String, dynamic> json,
+  factory Bill.fromJson(Map<String, dynamic> json,
       {ValueSerializer serializer = const ValueSerializer.defaults()}) {
-    return BillTabelData(
+    return Bill(
       id: serializer.fromJson<int>(json['id']),
       category: serializer.fromJson<String>(json['category']),
       comment: serializer.fromJson<String>(json['comment']),
@@ -55,9 +54,8 @@ class BillTabelData extends DataClass implements Insertable<BillTabelData> {
   }
 
   @override
-  T createCompanion<T extends UpdateCompanion<BillTabelData>>(
-      bool nullToAbsent) {
-    return BillTabelCompanion(
+  T createCompanion<T extends UpdateCompanion<Bill>>(bool nullToAbsent) {
+    return BillsCompanion(
       id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       category: category == null && nullToAbsent
           ? const Value.absent()
@@ -71,9 +69,8 @@ class BillTabelData extends DataClass implements Insertable<BillTabelData> {
     ) as T;
   }
 
-  BillTabelData copyWith(
-          {int id, String category, String comment, DateTime datatime}) =>
-      BillTabelData(
+  Bill copyWith({int id, String category, String comment, DateTime datatime}) =>
+      Bill(
         id: id ?? this.id,
         category: category ?? this.category,
         comment: comment ?? this.comment,
@@ -81,7 +78,7 @@ class BillTabelData extends DataClass implements Insertable<BillTabelData> {
       );
   @override
   String toString() {
-    return (StringBuffer('BillTabelData(')
+    return (StringBuffer('Bill(')
           ..write('id: $id, ')
           ..write('category: $category, ')
           ..write('comment: $comment, ')
@@ -96,30 +93,30 @@ class BillTabelData extends DataClass implements Insertable<BillTabelData> {
   @override
   bool operator ==(other) =>
       identical(this, other) ||
-      (other is BillTabelData &&
+      (other is Bill &&
           other.id == id &&
           other.category == category &&
           other.comment == comment &&
           other.datatime == datatime);
 }
 
-class BillTabelCompanion extends UpdateCompanion<BillTabelData> {
+class BillsCompanion extends UpdateCompanion<Bill> {
   final Value<int> id;
   final Value<String> category;
   final Value<String> comment;
   final Value<DateTime> datatime;
-  const BillTabelCompanion({
+  const BillsCompanion({
     this.id = const Value.absent(),
     this.category = const Value.absent(),
     this.comment = const Value.absent(),
     this.datatime = const Value.absent(),
   });
-  BillTabelCompanion copyWith(
+  BillsCompanion copyWith(
       {Value<int> id,
       Value<String> category,
       Value<String> comment,
       Value<DateTime> datatime}) {
-    return BillTabelCompanion(
+    return BillsCompanion(
       id: id ?? this.id,
       category: category ?? this.category,
       comment: comment ?? this.comment,
@@ -128,11 +125,10 @@ class BillTabelCompanion extends UpdateCompanion<BillTabelData> {
   }
 }
 
-class $BillTabelTable extends BillTabel
-    with TableInfo<$BillTabelTable, BillTabelData> {
+class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
   final GeneratedDatabase _db;
   final String _alias;
-  $BillTabelTable(this._db, [this._alias]);
+  $BillsTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   GeneratedIntColumn _id;
   @override
@@ -175,13 +171,13 @@ class $BillTabelTable extends BillTabel
   @override
   List<GeneratedColumn> get $columns => [id, category, comment, datatime];
   @override
-  $BillTabelTable get asDslTable => this;
+  $BillsTable get asDslTable => this;
   @override
-  String get $tableName => _alias ?? 'bill_tabel';
+  String get $tableName => _alias ?? 'bills';
   @override
-  final String actualTableName = 'bill_tabel';
+  final String actualTableName = 'bills';
   @override
-  VerificationContext validateIntegrity(BillTabelCompanion d,
+  VerificationContext validateIntegrity(BillsCompanion d,
       {bool isInserting = false}) {
     final context = VerificationContext();
     if (d.id.present) {
@@ -213,13 +209,13 @@ class $BillTabelTable extends BillTabel
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  BillTabelData map(Map<String, dynamic> data, {String tablePrefix}) {
+  Bill map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return BillTabelData.fromData(data, _db, prefix: effectivePrefix);
+    return Bill.fromData(data, _db, prefix: effectivePrefix);
   }
 
   @override
-  Map<String, Variable> entityToSql(BillTabelCompanion d) {
+  Map<String, Variable> entityToSql(BillsCompanion d) {
     final map = <String, Variable>{};
     if (d.id.present) {
       map['id'] = Variable<int, IntType>(d.id.value);
@@ -237,15 +233,15 @@ class $BillTabelTable extends BillTabel
   }
 
   @override
-  $BillTabelTable createAlias(String alias) {
-    return $BillTabelTable(_db, alias);
+  $BillsTable createAlias(String alias) {
+    return $BillsTable(_db, alias);
   }
 }
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(const SqlTypeSystem.withDefaults(), e);
-  $BillTabelTable _billTabel;
-  $BillTabelTable get billTabel => _billTabel ??= $BillTabelTable(this);
+  $BillsTable _bills;
+  $BillsTable get bills => _bills ??= $BillsTable(this);
   @override
-  List<TableInfo> get allTables => [billTabel];
+  List<TableInfo> get allTables => [bills];
 }

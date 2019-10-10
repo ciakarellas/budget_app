@@ -1,7 +1,7 @@
+import 'package:budget_app/database/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-import '../models/bill.dart';
 
 class SumState extends ChangeNotifier {
 
@@ -17,13 +17,13 @@ class SumState extends ChangeNotifier {
     notifyListeners();
   }
 
-  //List of Bills
-  final List<Bill> _bills = [];
-  get bills => _bills;
+  //List of Bills in Moor database
+  final listOfBills = AppDatabase().watchAllBills();
+
   void addBill(Bill bill){
-    _bills.add(bill);
-    notifyListeners();
+    AppDatabase().insertNewBill(bill);
   }
+/*
 
   void deleteBill(Bill bill){
     _bills.remove(bill);
@@ -39,6 +39,6 @@ class SumState extends ChangeNotifier {
     _sum = _bills.fold(0,(sum, bill) => sum + bill.price);
     notifyListeners();
   }
-
+*/
   
 }
