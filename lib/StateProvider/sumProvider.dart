@@ -20,8 +20,9 @@ class SumState extends ChangeNotifier {
   //List of Bills in Moor database
   final listOfBills = AppDatabase().watchAllBills();
 
-  void addBill(Bill bill){
-    AppDatabase().insertNewBill(bill);
+  // TODO jeszcze nie działa to właściwie nie wiem czemu classa Bill wymaga ID skoro jest ustawiona jako autoincerented
+  void addBill(bill){
+    AppDatabase().insertNewBill();
   }
 /*
 

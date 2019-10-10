@@ -1,11 +1,12 @@
 
+import 'package:budget_app/models/bill.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../StateProvider/sumProvider.dart';
-import '../models/bill.dart';
 import '../widgets/billList.dart';
+import '../database/data.dart';
 
 class MyHomePage extends StatelessWidget {
 
@@ -32,9 +33,9 @@ class MyHomePage extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top:200),
-                      child: Text(
-                        sum.sum.toString(),
-                        style: TextStyle(fontSize: 30, fontFamily: 'Aleo Light'),
+                      child: Text('20'
+                        /*sum.sum.toString(),
+                        style: TextStyle(fontSize: 30, fontFamily: 'Aleo Light'),*/
                       ),
                     ),
                     Padding(
@@ -70,9 +71,10 @@ class MyHomePage extends StatelessWidget {
                       child: Icon(Icons.add),
                       onPressed: (){
                         final amount = double.parse(_sumController.text);
-                        final newBill = new Bill(amount, sum.selectedCategory);
+
+                        //TODO to jeszcze nie działa. Musze rozmkinic dalaczego w class Bill jest wymagany id skoro jest autoincremented
+                        final newBill = new NewBill( sum.selectedCategory);
                         sum.addBill(newBill);
-                        sum.sumOfBill();
                         _sumController.clear();
                       },
                     ),
