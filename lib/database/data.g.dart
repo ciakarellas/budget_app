@@ -14,7 +14,7 @@ class Bill extends DataClass implements Insertable<Bill> {
   final DateTime datatime;
   Bill(
       {@required this.id,
-      @required this.category,
+      this.category,
       @required this.comment,
       this.datatime});
   factory Bill.fromData(Map<String, dynamic> data, GeneratedDatabase db,
@@ -143,7 +143,7 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
   @override
   GeneratedTextColumn get category => _category ??= _constructCategory();
   GeneratedTextColumn _constructCategory() {
-    return GeneratedTextColumn('category', $tableName, false,
+    return GeneratedTextColumn('category', $tableName, true,
         minTextLength: 1, maxTextLength: 20);
   }
 

@@ -1,8 +1,8 @@
 
-class Bill{
+class NewBill{
   String comment, category;
   DateTime time;
   double price;
   
-  Bill(this.price, this.category );
+  NewBill(this.category );
 }
