@@ -20,9 +20,9 @@ class _MyHomePageState extends State<MyHomePage> {
     
     return Scaffold(
       body: SafeArea(
-        child:Container(
+        child:Column(
           //padding: EdgeInsets.all(6),
-          child: Expanded(child: _buildBillList(context),)
+          children: <Widget>[Expanded(child: _buildBillList(context),)], 
             ),
           ),
     );

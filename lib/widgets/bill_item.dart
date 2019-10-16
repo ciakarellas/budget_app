@@ -9,6 +9,8 @@ class BillList extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       itemCount: bills.length,
       itemBuilder: (_, item){
         final bill = bills[item];
