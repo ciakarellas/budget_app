@@ -1,3 +1,4 @@
+import 'package:budget_app/widgets/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      body: SafeArea(
-        child:Column(
-          //padding: EdgeInsets.all(6),
-          children: <Widget>[Expanded(child: _buildBillList(context),)], 
-            ),
-          ),
+      body: _buildBillList(context)
     );
   }
 
@@ -34,61 +30,21 @@ class _MyHomePageState extends State<MyHomePage> {
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
         final bills = snapshot.data ?? List();
-            return Center(
-              child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top:200),
-                  child: Text('20'
-                    /*sum.sum.toString(),
-                    style: TextStyle(fontSize: 30, fontFamily: 'Aleo Light'),*/
+        return CustomScrollView(
+            slivers:<Widget>[
+              SliverPadding(
+                padding: EdgeInsets.all(8.0),
+                sliver: SliverList( 
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, index){
+                      return ItemBill(bills[index], database);
+                    },
+                    childCount: bills.length
+                    //bills.map((bill) => ItemBill(bill)).toList()
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top:100),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 180,
-                        child: TextFormField(
-                          controller: _controller,
-                          style: TextStyle(),
-                          keyboardType: TextInputType.datetime,
-                          decoration: InputDecoration()
-                        ),
-                      ),
-                      /*DropdownButton(
-                        items: sum.category.map<DropdownMenuItem>((String newCategory){
-                          return DropdownMenuItem<String>(
-                            value: newCategory,
-                            child: Text(newCategory),
-                          );
-                        }).toList(),
-                        onChanged: (category){
-                          sum.selectedCategory = category;
-                        },
-                        value: sum.selectedCategory,
-                      ),*/
-                    ],
-                  ),
-                ),
-                FlatButton(
-                  child: Icon(Icons.add),
-                  onPressed: (){
-                    //final amount = double.parse(_controller.text);
-                    final newBill = Bill(comment: _controller.text);
-                    database.insertNewBill(newBill);
-                    _controller.clear();
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top:40),
-                  child:BillList(bills,database)
-                ),
-              ],
-            ),
+              ),
+            ]
         );
       }
     );
