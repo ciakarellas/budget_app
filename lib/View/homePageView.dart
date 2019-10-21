@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-//import '../widgets/billList.dart';
 import '../database/data.dart';
-import '../widgets/bill_item.dart';
 
 class MyHomePage extends StatefulWidget {
 
@@ -40,7 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       return ItemBill(bills[index], database);
                     },
                     childCount: bills.length
-                    //bills.map((bill) => ItemBill(bill)).toList()
                   ),
                 ),
               ),

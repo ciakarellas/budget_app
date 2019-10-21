@@ -8,7 +8,7 @@ class Bills extends Table {
   IntColumn get id => integer().autoIncrement()();
   //TextColumn get category => text().withLength(min: 1, max: 20).nullable()();
   TextColumn get comment => text().withLength(min: 1, max: 256)();
-  RealColumn get price => real().nullable()();
+  //RealColumn get price => real().nullable()();
   //DateTimeColumn get datatime => dateTime().nullable()();
 }
 

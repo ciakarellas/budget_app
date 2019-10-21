@@ -1,6 +1,3 @@
-
-import 'package:provider/provider.dart';
-import 'package:budget_app/DataBase/data.dart';
 import 'package:flutter/material.dart';
 
 class ItemBill extends StatelessWidget {
