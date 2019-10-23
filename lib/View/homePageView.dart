@@ -1,9 +1,11 @@
-import 'package:budget_app/widgets/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../database/data.dart';
+import 'package:budget_app/widgets/dashboard_sliver.dart';
+import 'package:budget_app/widgets/item.dart';
+import 'package:budget_app/widgets/dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
 
@@ -30,6 +32,9 @@ class _MyHomePageState extends State<MyHomePage> {
         final bills = snapshot.data ?? List();
         return CustomScrollView(
             slivers:<Widget>[
+              DashboardSliver(
+                child: Dashboard()
+              ),
               SliverPadding(
                 padding: EdgeInsets.all(8.0),
                 sliver: SliverList( 
