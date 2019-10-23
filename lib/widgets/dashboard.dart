@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Dashboard extends StatelessWidget {
+  final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final database = Provider.of<AppDatabase>(context);
@@ -28,7 +29,7 @@ class Dashboard extends StatelessWidget {
                   Container(
                     width: 180,
                     child: TextFormField(
-                      //controller: _sumController,
+                      controller: _controller,
                       style: TextStyle(),
                       keyboardType: TextInputType.datetime,
                       decoration: InputDecoration()
@@ -52,7 +53,8 @@ class Dashboard extends StatelessWidget {
             FlatButton(
               child: Icon(Icons.add),
               onPressed: (){
-                final newBill = new Bill(comment: "test");
+                final price = double.parse(_controller.text);
+                final newBill = new Bill(comment: "test", price: price);
                 database.insertNewBill(newBill);
               },
             ),
@@ -62,5 +64,7 @@ class Dashboard extends StatelessWidget {
       }
     );;
   }
+
+  parseFloat(TextEditingController controller) {}
   
 }

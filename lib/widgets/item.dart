@@ -22,7 +22,11 @@ class ItemBill extends StatelessWidget {
               },
               child: Icon(Icons.delete),
             ),
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.all(4),
+            child: Text(bill.price.toString()),
+          ),
         ],
       );
   }
