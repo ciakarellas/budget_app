@@ -6,8 +6,8 @@
 class Bill extends DataClass implements Insertable<Bill> {
   final int id;
   final String comment;
-  final double price;
-  Bill({@required this.id, @required this.comment, this.price});
+  final double newprice;
+  Bill({@required this.id, @required this.comment, this.newprice});
   factory Bill.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -18,8 +18,8 @@ class Bill extends DataClass implements Insertable<Bill> {
       id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       comment:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}comment']),
-      price:
-          doubleType.mapFromDatabaseResponse(data['${effectivePrefix}price']),
+      newprice: doubleType
+          .mapFromDatabaseResponse(data['${effectivePrefix}newprice']),
     );
   }
   factory Bill.fromJson(Map<String, dynamic> json,
@@ -27,7 +27,7 @@ class Bill extends DataClass implements Insertable<Bill> {
     return Bill(
       id: serializer.fromJson<int>(json['id']),
       comment: serializer.fromJson<String>(json['comment']),
-      price: serializer.fromJson<double>(json['price']),
+      newprice: serializer.fromJson<double>(json['newprice']),
     );
   }
   @override
@@ -36,7 +36,7 @@ class Bill extends DataClass implements Insertable<Bill> {
     return {
       'id': serializer.toJson<int>(id),
       'comment': serializer.toJson<String>(comment),
-      'price': serializer.toJson<double>(price),
+      'newprice': serializer.toJson<double>(newprice),
     };
   }
 
@@ -47,58 +47,59 @@ class Bill extends DataClass implements Insertable<Bill> {
       comment: comment == null && nullToAbsent
           ? const Value.absent()
           : Value(comment),
-      price:
-          price == null && nullToAbsent ? const Value.absent() : Value(price),
+      newprice: newprice == null && nullToAbsent
+          ? const Value.absent()
+          : Value(newprice),
     );
   }
 
-  Bill copyWith({int id, String comment, double price}) => Bill(
+  Bill copyWith({int id, String comment, double newprice}) => Bill(
         id: id ?? this.id,
         comment: comment ?? this.comment,
-        price: price ?? this.price,
+        newprice: newprice ?? this.newprice,
       );
   @override
   String toString() {
     return (StringBuffer('Bill(')
           ..write('id: $id, ')
           ..write('comment: $comment, ')
-          ..write('price: $price')
+          ..write('newprice: $newprice')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode =>
-      $mrjf($mrjc(id.hashCode, $mrjc(comment.hashCode, price.hashCode)));
+      $mrjf($mrjc(id.hashCode, $mrjc(comment.hashCode, newprice.hashCode)));
   @override
   bool operator ==(other) =>
       identical(this, other) ||
       (other is Bill &&
           other.id == this.id &&
           other.comment == this.comment &&
-          other.price == this.price);
+          other.newprice == this.newprice);
 }
 
 class BillsCompanion extends UpdateCompanion<Bill> {
   final Value<int> id;
   final Value<String> comment;
-  final Value<double> price;
+  final Value<double> newprice;
   const BillsCompanion({
     this.id = const Value.absent(),
     this.comment = const Value.absent(),
-    this.price = const Value.absent(),
+    this.newprice = const Value.absent(),
   });
   BillsCompanion.insert({
     this.id = const Value.absent(),
     @required String comment,
-    this.price = const Value.absent(),
+    this.newprice = const Value.absent(),
   }) : comment = Value(comment);
   BillsCompanion copyWith(
-      {Value<int> id, Value<String> comment, Value<double> price}) {
+      {Value<int> id, Value<String> comment, Value<double> newprice}) {
     return BillsCompanion(
       id: id ?? this.id,
       comment: comment ?? this.comment,
-      price: price ?? this.price,
+      newprice: newprice ?? this.newprice,
     );
   }
 }
@@ -125,20 +126,20 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
         minTextLength: 1, maxTextLength: 256);
   }
 
-  final VerificationMeta _priceMeta = const VerificationMeta('price');
-  GeneratedRealColumn _price;
+  final VerificationMeta _newpriceMeta = const VerificationMeta('newprice');
+  GeneratedRealColumn _newprice;
   @override
-  GeneratedRealColumn get price => _price ??= _constructPrice();
-  GeneratedRealColumn _constructPrice() {
+  GeneratedRealColumn get newprice => _newprice ??= _constructNewprice();
+  GeneratedRealColumn _constructNewprice() {
     return GeneratedRealColumn(
-      'price',
+      'newprice',
       $tableName,
       true,
     );
   }
 
   @override
-  List<GeneratedColumn> get $columns => [id, comment, price];
+  List<GeneratedColumn> get $columns => [id, comment, newprice];
   @override
   $BillsTable get asDslTable => this;
   @override
@@ -160,11 +161,11 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
     } else if (comment.isRequired && isInserting) {
       context.missing(_commentMeta);
     }
-    if (d.price.present) {
-      context.handle(
-          _priceMeta, price.isAcceptableValue(d.price.value, _priceMeta));
-    } else if (price.isRequired && isInserting) {
-      context.missing(_priceMeta);
+    if (d.newprice.present) {
+      context.handle(_newpriceMeta,
+          newprice.isAcceptableValue(d.newprice.value, _newpriceMeta));
+    } else if (newprice.isRequired && isInserting) {
+      context.missing(_newpriceMeta);
     }
     return context;
   }
@@ -186,8 +187,8 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
     if (d.comment.present) {
       map['comment'] = Variable<String, StringType>(d.comment.value);
     }
-    if (d.price.present) {
-      map['price'] = Variable<double, RealType>(d.price.value);
+    if (d.newprice.present) {
+      map['newprice'] = Variable<double, RealType>(d.newprice.value);
     }
     return map;
   }

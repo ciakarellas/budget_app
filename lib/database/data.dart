@@ -6,10 +6,8 @@ part 'data.g.dart';
 class Bills extends Table {
   //last bracket it is a shortcut for function .call()
   IntColumn get id => integer().autoIncrement()();
-  //TextColumn get category => text().withLength(min: 1, max: 20).nullable()();
   TextColumn get comment => text().withLength(min: 1, max: 256)();
-  RealColumn get price => real().nullable()();
-  //DateTimeColumn get datatime => dateTime().nullable()();
+  RealColumn get newprice => real().nullable()();
 }
 
 
@@ -17,7 +15,7 @@ class Bills extends Table {
 class AppDatabase extends _$AppDatabase {
    //we need to use super constructor
    AppDatabase() : super(FlutterQueryExecutor.inDatabaseFolder(
-     path: "db.sqllite",
+     path: "app_db.sqllite",
      logStatements: true
      ));
      @override

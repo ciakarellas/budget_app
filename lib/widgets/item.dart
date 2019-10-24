@@ -25,7 +25,7 @@ class ItemBill extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.all(4),
-            child: Text(bill.price.toString()),
+            child: Text(bill.newprice.toString()),
           ),
         ],
       );
