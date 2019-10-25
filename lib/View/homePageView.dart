@@ -39,10 +39,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.all(8.0),
                 sliver: SliverList( 
                   delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, index){
-                      return ItemBill(bills[index], database);
+                    (BuildContext context, index,){
+                      return ItemBill(bills[(bills.length-1)-index], database);
                     },
                     childCount: bills.length
+                    
                   ),
                 ),
               ),
