@@ -11,6 +11,7 @@ class Dashboard extends StatelessWidget {
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
         final bills = snapshot.data ?? List();
+        List categories = database.getCategory() ?? ['codzienne','na mieście', 'chemia'];
         return Center(
           child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -36,8 +37,8 @@ class Dashboard extends StatelessWidget {
                       decoration: InputDecoration()
                     ),
                   ),
-                  /*DropdownButton(
-                    items: sum.category.map<DropdownMenuItem>((String newCategory){
+                  DropdownButton(
+                    items: categories.map<DropdownMenuItem>((String newCategory){
                       return DropdownMenuItem<String>(
                         value: newCategory,
                         child: Text(newCategory),
@@ -47,7 +48,7 @@ class Dashboard extends StatelessWidget {
                       sum.selectedCategory = category;
                     },
                     value: sum.selectedCategory,
-                  ),*/
+                  ),
                 ],
               ),
             ),
