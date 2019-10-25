@@ -10,6 +10,7 @@ class Dashboard extends StatelessWidget {
     return StreamBuilder(
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
+        final bills = snapshot.data ?? List();
         return Center(
           child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -17,7 +18,7 @@ class Dashboard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top:200),
               child: Text(
-                "gds",
+                sumOfBills(bills),
                 style: TextStyle(fontSize: 30, fontFamily: 'Aleo Light'),
               ),
             ),
@@ -64,8 +65,8 @@ class Dashboard extends StatelessWidget {
         );
       }
     );;
+  }  
+  sumOfBills(bills){
+    return bills.fold(0,(sum, bill) => sum + bill.newprice).toString();
   }
-
-  parseFloat(TextEditingController controller) {}
-  
 }
