@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:moor/moor.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
@@ -14,7 +16,7 @@ class Bills extends Table {
 class Categories extends Table {
   
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get description => text()();
+  TextColumn get categories => text().withDefault(Constant('Jedzenie')).withDefault(Constant('Na mieście')).withDefault(Constant('Chemia'))();
 }
 
 
@@ -24,8 +26,9 @@ class AppDatabase extends _$AppDatabase {
    //we need to use super constructor
    AppDatabase() : super(FlutterQueryExecutor.inDatabaseFolder(
      path: "app_db.sqllite",
-     logStatements: true
-     ));
+     logStatements: true,
+     
+     ),);
      @override
      int get schemaVersion => 1;
     // tutaj bills jest akceptowane i nie jest randomową nazwą, gdyż to jest alias to table name który jest generowany automatycznie w data.g.dart
@@ -33,5 +36,5 @@ class AppDatabase extends _$AppDatabase {
      Future insertNewBill(Bill bill) => into(bills).insert(bill);
      Future deleteBill(Bill bill) => delete(bills).delete(bill);
 
-     Future getCategory() => select(categories).get();
+     Future<List<Category>> getCategory() => select(categories).get();
 }

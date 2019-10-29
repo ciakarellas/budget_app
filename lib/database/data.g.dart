@@ -205,8 +205,8 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
 
 class Category extends DataClass implements Insertable<Category> {
   final int id;
-  final String description;
-  Category({@required this.id, @required this.description});
+  final String categories;
+  Category({@required this.id, @required this.categories});
   factory Category.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -214,15 +214,15 @@ class Category extends DataClass implements Insertable<Category> {
     final stringType = db.typeSystem.forDartType<String>();
     return Category(
       id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      description: stringType
-          .mapFromDatabaseResponse(data['${effectivePrefix}description']),
+      categories: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}categories']),
     );
   }
   factory Category.fromJson(Map<String, dynamic> json,
       {ValueSerializer serializer = const ValueSerializer.defaults()}) {
     return Category(
       id: serializer.fromJson<int>(json['id']),
-      description: serializer.fromJson<String>(json['description']),
+      categories: serializer.fromJson<String>(json['categories']),
     );
   }
   @override
@@ -230,7 +230,7 @@ class Category extends DataClass implements Insertable<Category> {
       {ValueSerializer serializer = const ValueSerializer.defaults()}) {
     return {
       'id': serializer.toJson<int>(id),
-      'description': serializer.toJson<String>(description),
+      'categories': serializer.toJson<String>(categories),
     };
   }
 
@@ -238,50 +238,50 @@ class Category extends DataClass implements Insertable<Category> {
   CategoriesCompanion createCompanion(bool nullToAbsent) {
     return CategoriesCompanion(
       id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      description: description == null && nullToAbsent
+      categories: categories == null && nullToAbsent
           ? const Value.absent()
-          : Value(description),
+          : Value(categories),
     );
   }
 
-  Category copyWith({int id, String description}) => Category(
+  Category copyWith({int id, String categories}) => Category(
         id: id ?? this.id,
-        description: description ?? this.description,
+        categories: categories ?? this.categories,
       );
   @override
   String toString() {
     return (StringBuffer('Category(')
           ..write('id: $id, ')
-          ..write('description: $description')
+          ..write('categories: $categories')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(id.hashCode, description.hashCode));
+  int get hashCode => $mrjf($mrjc(id.hashCode, categories.hashCode));
   @override
   bool operator ==(other) =>
       identical(this, other) ||
       (other is Category &&
           other.id == this.id &&
-          other.description == this.description);
+          other.categories == this.categories);
 }
 
 class CategoriesCompanion extends UpdateCompanion<Category> {
   final Value<int> id;
-  final Value<String> description;
+  final Value<String> categories;
   const CategoriesCompanion({
     this.id = const Value.absent(),
-    this.description = const Value.absent(),
+    this.categories = const Value.absent(),
   });
   CategoriesCompanion.insert({
     this.id = const Value.absent(),
-    @required String description,
-  }) : description = Value(description);
-  CategoriesCompanion copyWith({Value<int> id, Value<String> description}) {
+    this.categories = const Value.absent(),
+  });
+  CategoriesCompanion copyWith({Value<int> id, Value<String> categories}) {
     return CategoriesCompanion(
       id: id ?? this.id,
-      description: description ?? this.description,
+      categories: categories ?? this.categories,
     );
   }
 }
@@ -300,22 +300,17 @@ class $CategoriesTable extends Categories
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
-  final VerificationMeta _descriptionMeta =
-      const VerificationMeta('description');
-  GeneratedTextColumn _description;
+  final VerificationMeta _categoriesMeta = const VerificationMeta('categories');
+  GeneratedTextColumn _categories;
   @override
-  GeneratedTextColumn get description =>
-      _description ??= _constructDescription();
-  GeneratedTextColumn _constructDescription() {
-    return GeneratedTextColumn(
-      'description',
-      $tableName,
-      false,
-    );
+  GeneratedTextColumn get categories => _categories ??= _constructCategories();
+  GeneratedTextColumn _constructCategories() {
+    return GeneratedTextColumn('categories', $tableName, false,
+        defaultValue: Constant('Jedzenie'));
   }
 
   @override
-  List<GeneratedColumn> get $columns => [id, description];
+  List<GeneratedColumn> get $columns => [id, categories];
   @override
   $CategoriesTable get asDslTable => this;
   @override
@@ -331,11 +326,11 @@ class $CategoriesTable extends Categories
     } else if (id.isRequired && isInserting) {
       context.missing(_idMeta);
     }
-    if (d.description.present) {
-      context.handle(_descriptionMeta,
-          description.isAcceptableValue(d.description.value, _descriptionMeta));
-    } else if (description.isRequired && isInserting) {
-      context.missing(_descriptionMeta);
+    if (d.categories.present) {
+      context.handle(_categoriesMeta,
+          categories.isAcceptableValue(d.categories.value, _categoriesMeta));
+    } else if (categories.isRequired && isInserting) {
+      context.missing(_categoriesMeta);
     }
     return context;
   }
@@ -354,8 +349,8 @@ class $CategoriesTable extends Categories
     if (d.id.present) {
       map['id'] = Variable<int, IntType>(d.id.value);
     }
-    if (d.description.present) {
-      map['description'] = Variable<String, StringType>(d.description.value);
+    if (d.categories.present) {
+      map['categories'] = Variable<String, StringType>(d.categories.value);
     }
     return map;
   }

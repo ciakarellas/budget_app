@@ -2,8 +2,10 @@ import 'package:budget_app/database/data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'dropDownBtnCategory.dart';
+
 class Dashboard extends StatelessWidget {
-  TextEditingController _controller = new TextEditingController();
+  final TextEditingController _controller = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     final database = Provider.of<AppDatabase>(context);
@@ -11,7 +13,6 @@ class Dashboard extends StatelessWidget {
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
         final bills = snapshot.data ?? List();
-        List categories = database.getCategory() ?? ['codzienne','na mieście', 'chemia'];
         return Center(
           child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -37,18 +38,7 @@ class Dashboard extends StatelessWidget {
                       decoration: InputDecoration()
                     ),
                   ),
-                  DropdownButton(
-                    items: categories.map<DropdownMenuItem>((String newCategory){
-                      return DropdownMenuItem<String>(
-                        value: newCategory,
-                        child: Text(newCategory),
-                      );
-                    }).toList(),
-                    onChanged: (category){
-                      sum.selectedCategory = category;
-                    },
-                    value: sum.selectedCategory,
-                  ),
+                    DropDownBtnCategory(database.getCategory();
                 ],
               ),
             ),
