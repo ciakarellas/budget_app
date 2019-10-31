@@ -38,7 +38,7 @@ class Dashboard extends StatelessWidget {
                       decoration: InputDecoration()
                     ),
                   ),
-                    DropDownBtnCategory(database.getCategory();
+                    DropDownBtnCategory(),
                 ],
               ),
             ),

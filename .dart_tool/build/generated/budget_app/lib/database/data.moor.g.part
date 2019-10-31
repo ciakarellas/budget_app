@@ -272,8 +272,8 @@ class CategoriesCompanion extends UpdateCompanion<Category> {
   });
   CategoriesCompanion.insert({
     this.id = const Value.absent(),
-    this.categories = const Value.absent(),
-  });
+    @required String categories,
+  }) : categories = Value(categories);
   CategoriesCompanion copyWith({Value<int> id, Value<String> categories}) {
     return CategoriesCompanion(
       id: id ?? this.id,
@@ -301,8 +301,11 @@ class $CategoriesTable extends Categories
   @override
   GeneratedTextColumn get categories => _categories ??= _constructCategories();
   GeneratedTextColumn _constructCategories() {
-    return GeneratedTextColumn('categories', $tableName, false,
-        defaultValue: Constant('Jedzenie'));
+    return GeneratedTextColumn(
+      'categories',
+      $tableName,
+      false,
+    );
   }
 
   @override

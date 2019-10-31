@@ -16,7 +16,7 @@ class Bills extends Table {
 class Categories extends Table {
   
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get categories => text().withDefault(Constant('Jedzenie')).withDefault(Constant('Na mieście')).withDefault(Constant('Chemia'))();
+  TextColumn get categories => text()();
 }
 
 
@@ -30,11 +30,11 @@ class AppDatabase extends _$AppDatabase {
      
      ),);
      @override
-     int get schemaVersion => 1;
+     int get schemaVersion => 2;
     // tutaj bills jest akceptowane i nie jest randomową nazwą, gdyż to jest alias to table name który jest generowany automatycznie w data.g.dart
      Stream<List<Bill>> watchAllBills() => select(bills).watch();
      Future insertNewBill(Bill bill) => into(bills).insert(bill);
      Future deleteBill(Bill bill) => delete(bills).delete(bill);
 
-     Future<List<Category>> getCategory() => select(categories).get();
+     Stream<List<Category>> getCategory() => select(categories).watch();
 }
