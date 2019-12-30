@@ -7,7 +7,12 @@ class Bill extends DataClass implements Insertable<Bill> {
   final int id;
   final String comment;
   final double newprice;
-  Bill({@required this.id, @required this.comment, this.newprice});
+  final String category;
+  Bill(
+      {@required this.id,
+      @required this.comment,
+      this.newprice,
+      @required this.category});
   factory Bill.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -20,6 +25,8 @@ class Bill extends DataClass implements Insertable<Bill> {
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}comment']),
       newprice: doubleType
           .mapFromDatabaseResponse(data['${effectivePrefix}newprice']),
+      category: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}category']),
     );
   }
   factory Bill.fromJson(Map<String, dynamic> json,
@@ -28,6 +35,7 @@ class Bill extends DataClass implements Insertable<Bill> {
       id: serializer.fromJson<int>(json['id']),
       comment: serializer.fromJson<String>(json['comment']),
       newprice: serializer.fromJson<double>(json['newprice']),
+      category: serializer.fromJson<String>(json['category']),
     );
   }
   @override
@@ -37,6 +45,7 @@ class Bill extends DataClass implements Insertable<Bill> {
       'id': serializer.toJson<int>(id),
       'comment': serializer.toJson<String>(comment),
       'newprice': serializer.toJson<double>(newprice),
+      'category': serializer.toJson<String>(category),
     };
   }
 
@@ -50,56 +59,71 @@ class Bill extends DataClass implements Insertable<Bill> {
       newprice: newprice == null && nullToAbsent
           ? const Value.absent()
           : Value(newprice),
+      category: category == null && nullToAbsent
+          ? const Value.absent()
+          : Value(category),
     );
   }
 
-  Bill copyWith({int id, String comment, double newprice}) => Bill(
+  Bill copyWith({int id, String comment, double newprice, String category}) =>
+      Bill(
         id: id ?? this.id,
         comment: comment ?? this.comment,
         newprice: newprice ?? this.newprice,
+        category: category ?? this.category,
       );
   @override
   String toString() {
     return (StringBuffer('Bill(')
           ..write('id: $id, ')
           ..write('comment: $comment, ')
-          ..write('newprice: $newprice')
+          ..write('newprice: $newprice, ')
+          ..write('category: $category')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      $mrjf($mrjc(id.hashCode, $mrjc(comment.hashCode, newprice.hashCode)));
+  int get hashCode => $mrjf($mrjc(id.hashCode,
+      $mrjc(comment.hashCode, $mrjc(newprice.hashCode, category.hashCode))));
   @override
   bool operator ==(other) =>
       identical(this, other) ||
       (other is Bill &&
           other.id == this.id &&
           other.comment == this.comment &&
-          other.newprice == this.newprice);
+          other.newprice == this.newprice &&
+          other.category == this.category);
 }
 
 class BillsCompanion extends UpdateCompanion<Bill> {
   final Value<int> id;
   final Value<String> comment;
   final Value<double> newprice;
+  final Value<String> category;
   const BillsCompanion({
     this.id = const Value.absent(),
     this.comment = const Value.absent(),
     this.newprice = const Value.absent(),
+    this.category = const Value.absent(),
   });
   BillsCompanion.insert({
     this.id = const Value.absent(),
     @required String comment,
     this.newprice = const Value.absent(),
-  }) : comment = Value(comment);
+    @required String category,
+  })  : comment = Value(comment),
+        category = Value(category);
   BillsCompanion copyWith(
-      {Value<int> id, Value<String> comment, Value<double> newprice}) {
+      {Value<int> id,
+      Value<String> comment,
+      Value<double> newprice,
+      Value<String> category}) {
     return BillsCompanion(
       id: id ?? this.id,
       comment: comment ?? this.comment,
       newprice: newprice ?? this.newprice,
+      category: category ?? this.category,
     );
   }
 }
@@ -138,8 +162,17 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
     );
   }
 
+  final VerificationMeta _categoryMeta = const VerificationMeta('category');
+  GeneratedTextColumn _category;
   @override
-  List<GeneratedColumn> get $columns => [id, comment, newprice];
+  GeneratedTextColumn get category => _category ??= _constructCategory();
+  GeneratedTextColumn _constructCategory() {
+    return GeneratedTextColumn('category', $tableName, false,
+        minTextLength: 1, maxTextLength: 256);
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, comment, newprice, category];
   @override
   $BillsTable get asDslTable => this;
   @override
@@ -167,6 +200,12 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
     } else if (newprice.isRequired && isInserting) {
       context.missing(_newpriceMeta);
     }
+    if (d.category.present) {
+      context.handle(_categoryMeta,
+          category.isAcceptableValue(d.category.value, _categoryMeta));
+    } else if (category.isRequired && isInserting) {
+      context.missing(_categoryMeta);
+    }
     return context;
   }
 
@@ -190,6 +229,9 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
     if (d.newprice.present) {
       map['newprice'] = Variable<double, RealType>(d.newprice.value);
     }
+    if (d.category.present) {
+      map['category'] = Variable<String, StringType>(d.category.value);
+    }
     return map;
   }
 
@@ -199,173 +241,10 @@ class $BillsTable extends Bills with TableInfo<$BillsTable, Bill> {
   }
 }
 
-class Category extends DataClass implements Insertable<Category> {
-  final int id;
-  final String categories;
-  Category({@required this.id, @required this.categories});
-  factory Category.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
-    final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
-    final stringType = db.typeSystem.forDartType<String>();
-    return Category(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      categories: stringType
-          .mapFromDatabaseResponse(data['${effectivePrefix}categories']),
-    );
-  }
-  factory Category.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer = const ValueSerializer.defaults()}) {
-    return Category(
-      id: serializer.fromJson<int>(json['id']),
-      categories: serializer.fromJson<String>(json['categories']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson(
-      {ValueSerializer serializer = const ValueSerializer.defaults()}) {
-    return {
-      'id': serializer.toJson<int>(id),
-      'categories': serializer.toJson<String>(categories),
-    };
-  }
-
-  @override
-  CategoriesCompanion createCompanion(bool nullToAbsent) {
-    return CategoriesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      categories: categories == null && nullToAbsent
-          ? const Value.absent()
-          : Value(categories),
-    );
-  }
-
-  Category copyWith({int id, String categories}) => Category(
-        id: id ?? this.id,
-        categories: categories ?? this.categories,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('Category(')
-          ..write('id: $id, ')
-          ..write('categories: $categories')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => $mrjf($mrjc(id.hashCode, categories.hashCode));
-  @override
-  bool operator ==(other) =>
-      identical(this, other) ||
-      (other is Category &&
-          other.id == this.id &&
-          other.categories == this.categories);
-}
-
-class CategoriesCompanion extends UpdateCompanion<Category> {
-  final Value<int> id;
-  final Value<String> categories;
-  const CategoriesCompanion({
-    this.id = const Value.absent(),
-    this.categories = const Value.absent(),
-  });
-  CategoriesCompanion.insert({
-    this.id = const Value.absent(),
-    @required String categories,
-  }) : categories = Value(categories);
-  CategoriesCompanion copyWith({Value<int> id, Value<String> categories}) {
-    return CategoriesCompanion(
-      id: id ?? this.id,
-      categories: categories ?? this.categories,
-    );
-  }
-}
-
-class $CategoriesTable extends Categories
-    with TableInfo<$CategoriesTable, Category> {
-  final GeneratedDatabase _db;
-  final String _alias;
-  $CategoriesTable(this._db, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
-  @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
-  final VerificationMeta _categoriesMeta = const VerificationMeta('categories');
-  GeneratedTextColumn _categories;
-  @override
-  GeneratedTextColumn get categories => _categories ??= _constructCategories();
-  GeneratedTextColumn _constructCategories() {
-    return GeneratedTextColumn(
-      'categories',
-      $tableName,
-      false,
-    );
-  }
-
-  @override
-  List<GeneratedColumn> get $columns => [id, categories];
-  @override
-  $CategoriesTable get asDslTable => this;
-  @override
-  String get $tableName => _alias ?? 'categories';
-  @override
-  final String actualTableName = 'categories';
-  @override
-  VerificationContext validateIntegrity(CategoriesCompanion d,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    if (d.id.present) {
-      context.handle(_idMeta, id.isAcceptableValue(d.id.value, _idMeta));
-    } else if (id.isRequired && isInserting) {
-      context.missing(_idMeta);
-    }
-    if (d.categories.present) {
-      context.handle(_categoriesMeta,
-          categories.isAcceptableValue(d.categories.value, _categoriesMeta));
-    } else if (categories.isRequired && isInserting) {
-      context.missing(_categoriesMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  Category map(Map<String, dynamic> data, {String tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return Category.fromData(data, _db, prefix: effectivePrefix);
-  }
-
-  @override
-  Map<String, Variable> entityToSql(CategoriesCompanion d) {
-    final map = <String, Variable>{};
-    if (d.id.present) {
-      map['id'] = Variable<int, IntType>(d.id.value);
-    }
-    if (d.categories.present) {
-      map['categories'] = Variable<String, StringType>(d.categories.value);
-    }
-    return map;
-  }
-
-  @override
-  $CategoriesTable createAlias(String alias) {
-    return $CategoriesTable(_db, alias);
-  }
-}
-
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $BillsTable _bills;
   $BillsTable get bills => _bills ??= $BillsTable(this);
-  $CategoriesTable _categories;
-  $CategoriesTable get categories => _categories ??= $CategoriesTable(this);
   @override
-  List<TableInfo> get allTables => [bills, categories];
+  List<TableInfo> get allTables => [bills];
 }

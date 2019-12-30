@@ -1,3 +1,4 @@
+import 'package:budget_app/Provider/categoryProvider.dart';
 import 'package:budget_app/database/data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final database = Provider.of<AppDatabase>(context);
+    final category = Provider.of<CategoryProvider>(context);
     return StreamBuilder(
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
@@ -38,7 +40,7 @@ class Dashboard extends StatelessWidget {
                       decoration: InputDecoration()
                     ),
                   ),
-                    DropDownBtnCategory(),
+                  DropDownCategory(),
                 ],
               ),
             ),
@@ -46,7 +48,7 @@ class Dashboard extends StatelessWidget {
               child: Icon(Icons.add),
               onPressed: (){
                 final price = double.parse(_controller.text);
-                final newBill = new Bill(comment: "test", newprice: price);
+                final newBill = new Bill(comment: "test", newprice: price, category: category.selectedCategory);
                 database.insertNewBill(newBill);
                 _controller.clear();
               },

@@ -10,18 +10,11 @@ class Bills extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get comment => text().withLength(min: 1, max: 256)();
   RealColumn get newprice => real().nullable()();
-}
-
-@DataClassName("Category")
-class Categories extends Table {
-  
-  IntColumn get id => integer().autoIncrement()();
-  TextColumn get categories => text()();
+  TextColumn get category => text().withLength(min: 1, max: 256)();
 }
 
 
-
-@UseMoor(tables: [Bills, Categories])
+@UseMoor(tables: [Bills])
 class AppDatabase extends _$AppDatabase {
    //we need to use super constructor
    AppDatabase() : super(FlutterQueryExecutor.inDatabaseFolder(
@@ -35,6 +28,4 @@ class AppDatabase extends _$AppDatabase {
      Stream<List<Bill>> watchAllBills() => select(bills).watch();
      Future insertNewBill(Bill bill) => into(bills).insert(bill);
      Future deleteBill(Bill bill) => delete(bills).delete(bill);
-
-     Stream<List<Category>> getCategory() => select(categories).watch();
 }

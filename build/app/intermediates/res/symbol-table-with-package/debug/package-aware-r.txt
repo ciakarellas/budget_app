@@ -1,4 +1,0 @@
-com.example.budget_app
-drawable launch_background
-mipmap ic_launcher
-style LaunchTheme

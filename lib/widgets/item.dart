@@ -27,6 +27,10 @@ class ItemBill extends StatelessWidget {
             padding: EdgeInsets.all(4),
             child: Text(bill.newprice.toString()),
           ),
+          Padding(
+            padding: EdgeInsets.all(4),
+            child: Text(bill.category),
+          ),
         ],
       );
   }
