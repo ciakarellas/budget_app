@@ -1,92 +1,55 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../StateProvider/sumProvider.dart';
-import '../models/bill.dart';
-import '../widgets/billList.dart';
+import '../database/data.dart';
+import 'package:budget_app/widgets/dashboard_sliver.dart';
+import 'package:budget_app/widgets/item.dart';
+import 'package:budget_app/widgets/dashboard.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
 
- TextEditingController _sumController = new TextEditingController();
- //TO DO
- //obejrzec video na YT. Dodać liste do providera która bede mmodyfikował potem jako rozszerzenie
-  
-  
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+ TextEditingController _controller = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
-    final sum = Provider.of<SumState>(context);
-   
+    
     return Scaffold(
-      body: SafeArea(
-        child:SingleChildScrollView(
-          padding: EdgeInsets.all(6),
-            child: Consumer<SumState>(
-              builder: (context, sum, child) {
-                return Center(
-                  child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top:200),
-                      child: Text(
-                        sum.sum.toString(),
-                        style: TextStyle(fontSize: 30, fontFamily: 'Aleo Light'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:100),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: 180,
-                            child: TextFormField(
-                              controller: _sumController,
-                              style: TextStyle(),
-                              keyboardType: TextInputType.datetime,
-                              decoration: InputDecoration()
-                            ),
-                          ),
-                          DropdownButton(
-                            items: sum.category.map<DropdownMenuItem>((String newCategory){
-                              return DropdownMenuItem<String>(
-                                value: newCategory,
-                                child: Text(newCategory),
-                              );
-                            }).toList(),
-                            onChanged: (category){
-                              sum.selectedCategory = category;
-                            },
-                            value: sum.selectedCategory,
-                          ),
-                        ],
-                      ),
-                    ),
-                    FlatButton(
-                      child: Icon(Icons.add),
-                      onPressed: (){
-                        final amount = double.parse(_sumController.text);
-                        final newBill = new Bill(amount, sum.selectedCategory);
-                        sum.addBill(newBill);
-                        sum.sumOfBill();
-                        _sumController.clear();
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:40),
-                      child:BillList(sum.bills)
-                    ),
-                  ],
+      body: _buildBillList(context)
+    );
+  }
+
+  StreamBuilder<List<Bill>> _buildBillList(BuildContext context){
+    final database = Provider.of<AppDatabase>(context);
+    return StreamBuilder(
+      stream: database.watchAllBills(),
+      builder: (context, snapshot) {
+        final bills = snapshot.data ?? List();
+        return CustomScrollView(
+            slivers:<Widget>[
+              DashboardSliver(
+                child: Dashboard()
+              ),
+              SliverPadding(
+                padding: EdgeInsets.all(8.0),
+                sliver: SliverList( 
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, index,){
+                      return ItemBill(bills[(bills.length-1)-index], database);
+                    },
+                    childCount: bills.length
+                    
+                  ),
                 ),
-                );
-              },
-            ),
-          ),
-      ),
+              ),
+            ]
+        );
+      }
     );
   }
 }
