@@ -40,19 +40,28 @@ class Dashboard extends StatelessWidget {
                       decoration: InputDecoration()
                     ),
                   ),
-                  DropDownCategory(),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
+                    child: DropDownCategory(),
+                  ),
                 ],
               ),
             ),
-            FlatButton(
-              child: Icon(Icons.add),
-              onPressed: (){
-                final price = double.parse(_controller.text);
-                final newBill = new Bill(comment: "test", newprice: price, category: category.selectedCategory);
-                database.insertNewBill(newBill);
-                _controller.clear();
-              },
-            ),
+                FlatButton(
+                  child: Icon(Icons.add),
+                  onPressed: (){
+                    final price = double.parse(_controller.text);
+                    final newBill = new Bill(newprice: price, category: category.selectedCategory);
+                    database.insertNewBill(newBill);
+                    _controller.clear();
+                  },
+                ),
+                FlatButton(
+                  child: Icon(Icons.clear_all),
+                  onPressed: (){
+                    database.deleteAllBill(bills[0]);
+                  },
+                )
           ],
         ),
         );

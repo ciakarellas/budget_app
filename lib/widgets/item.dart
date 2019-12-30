@@ -8,30 +8,31 @@ class ItemBill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Row(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(4),
-            child: Text(bill.comment),
-          ),
-          Padding(
-            padding: EdgeInsets.all(4),
-            child: FlatButton(
-              onPressed: (){
-                database.deleteBill(bill);
-              },
-              child: Icon(Icons.delete),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+      child: Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(4),
+              child: Text(bill.newprice.toString()),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(4),
-            child: Text(bill.newprice.toString()),
-          ),
-          Padding(
-            padding: EdgeInsets.all(4),
-            child: Text(bill.category),
-          ),
-        ],
-      );
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(20, 4, 0, 4),
+                child: Text(bill.category),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(4),
+              child: FlatButton(
+                onPressed: (){
+                  database.deleteBill(bill);
+                },
+                child: Icon(Icons.delete),
+              ),
+            ),
+          ],
+        ),
+    );
   }
 }
