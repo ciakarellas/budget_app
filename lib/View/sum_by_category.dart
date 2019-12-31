@@ -15,16 +15,18 @@ class SumOfCategory extends StatelessWidget {
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
         final bills = snapshot.data ?? List();
-        return Container(
-          padding: EdgeInsets.all(8.0),
-          margin: EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              Text('Jedzenie'),
-              Text(sumOfCategoryBills(bills, 'Jedzenie')),
-            ],
-          ),
-          );
+        return Expanded(
+          child: Container(
+            padding: EdgeInsets.all(2.0),
+            margin: EdgeInsets.all(2.0),
+            child: Column(
+              children: <Widget>[
+                Text(category),
+                Text(sumOfCategoryBills(bills, category)),
+              ],
+            ),
+            ),
+        );
       }
     );
   }

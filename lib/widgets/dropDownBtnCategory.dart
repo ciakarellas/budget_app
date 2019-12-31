@@ -12,7 +12,7 @@ class DropDownCategory extends StatelessWidget{
     final categoryProvider = Provider.of<CategoryProvider>(context);
     return Container(
       child: DropdownButton(
-        items: categoryProvider.categries.map<DropdownMenuItem>((newCategory){
+        items: categoryProvider.categories.map<DropdownMenuItem>((newCategory){
           return DropdownMenuItem<String>(
             value: newCategory,
             child: Text(newCategory),

@@ -5,7 +5,7 @@ class CategoryProvider extends ChangeNotifier{
   List<String> _categories = ['Jedzenie', 'Na mieście', 'Stałe opłaty', 'Chemia' ];
   String _selectedCategory = 'Jedzenie';
 
-  get categries => _categories;
+  get categories => _categories;
   get selectedCategory => _selectedCategory;
 
   void categoryChange(String category){

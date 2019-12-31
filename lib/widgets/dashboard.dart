@@ -12,18 +12,25 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final database = Provider.of<AppDatabase>(context);
-    final category = Provider.of<CategoryProvider>(context);
+    final categories = Provider.of<CategoryProvider>(context);
     return StreamBuilder(
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
         final bills = snapshot.data ?? List();
+        List categoriesList = categories.categories;
         return Center(
           child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SumOfCategory('Jedzenie'),
             Padding(
-              padding: const EdgeInsets.only(top:200),
+              padding: const EdgeInsets.fromLTRB(8, 100, 8, 10),
+              child: Row(
+                children: 
+                  categoriesList.map((e) => new SumOfCategory(e)).toList()
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top:150),
               child: Text(
                 sumOfBills(bills),
                 style: TextStyle(fontSize: 30, fontFamily: 'Aleo Light'),
@@ -54,7 +61,7 @@ class Dashboard extends StatelessWidget {
                   child: Icon(Icons.add),
                   onPressed: (){
                     final price = double.parse(_controller.text);
-                    final newBill = new Bill(newprice: price, category: category.selectedCategory);
+                    final newBill = new Bill(newprice: price, category: categories.selectedCategory);
                     database.insertNewBill(newBill);
                     _controller.clear();
                   },
