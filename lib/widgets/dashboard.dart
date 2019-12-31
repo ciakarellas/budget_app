@@ -1,9 +1,11 @@
 import 'package:budget_app/Provider/categoryProvider.dart';
+import 'package:budget_app/View/sum_by_category.dart';
 import 'package:budget_app/database/data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'dropDownBtnCategory.dart';
+import '../functions/sumOfBills.dart';
 
 class Dashboard extends StatelessWidget {
   final TextEditingController _controller = new TextEditingController();
@@ -19,6 +21,7 @@ class Dashboard extends StatelessWidget {
           child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            SumOfCategory('Jedzenie'),
             Padding(
               padding: const EdgeInsets.only(top:200),
               child: Text(
@@ -68,7 +71,5 @@ class Dashboard extends StatelessWidget {
       }
     );;
   }  
-  sumOfBills(bills){
-    return bills.fold(0,(sum, bill) => sum + bill.newprice).toString();
-  }
+  
 }

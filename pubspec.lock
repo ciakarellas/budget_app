@@ -35,11 +35,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.3.0"
-=======
     version: "2.4.0"
->>>>>>> moor_DropdownBTN
   boolean_selector:
     dependency: transitive
     description:
@@ -47,8 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-<<<<<<< HEAD
-=======
   build:
     dependency: transitive
     description:
@@ -112,7 +106,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.8.2"
->>>>>>> moor_DropdownBTN
   charcode:
     dependency: transitive
     description:
@@ -297,9 +290,6 @@ packages:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.1.7"
-=======
     version: "1.1.8"
   mime:
     dependency: transitive
@@ -357,7 +347,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.10"
->>>>>>> moor_DropdownBTN
   path:
     dependency: transitive
     description:
@@ -372,8 +361,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0+1"
-<<<<<<< HEAD
-=======
   petitparser:
     dependency: transitive
     description:
@@ -388,7 +375,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
->>>>>>> moor_DropdownBTN
   provider:
     dependency: "direct main"
     description:
@@ -417,8 +403,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-<<<<<<< HEAD
-=======
   recase:
     dependency: transitive
     description:
@@ -440,7 +424,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.3"
->>>>>>> moor_DropdownBTN
   sky_engine:
     dependency: transitive
     description: flutter
@@ -502,8 +485,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-<<<<<<< HEAD
-=======
   synchronized:
     dependency: transitive
     description:
@@ -511,7 +492,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0+1"
->>>>>>> moor_DropdownBTN
   term_glyph:
     dependency: transitive
     description:
