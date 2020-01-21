@@ -46,7 +46,7 @@ class Dashboard extends StatelessWidget {
                     child: TextFormField(
                       controller: _controller,
                       style: TextStyle(),
-                      keyboardType: TextInputType.datetime,
+                      keyboardType: TextInputType.phone,
                       decoration: InputDecoration()
                     ),
                   ),

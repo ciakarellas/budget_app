@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue Jan 21 13:44:00 CET 2020
+#Tue Jan 21 14:06:36 CET 2020
 4.path=lib/arm64-v8a/libflutter.so
 8.set=ASSET
 6.path=flutter_assets/isolate_snapshot_data
