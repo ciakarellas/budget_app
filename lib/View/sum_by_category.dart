@@ -11,14 +11,14 @@ class SumOfCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     final database = Provider.of<AppDatabase>(context);
 
-    return StreamBuilder<Object>(
+    return StreamBuilder(
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
-        final bills = snapshot.data ?? List();
+        final bills = snapshot.data ?? List<Bill>();
         return Expanded(
           child: Container(
-            padding: EdgeInsets.all(2.0),
-            margin: EdgeInsets.all(2.0),
+            padding: EdgeInsets.all(1.5),
+            margin: EdgeInsets.all(1.5),
             child: Column(
               children: <Widget>[
                 Text(category),

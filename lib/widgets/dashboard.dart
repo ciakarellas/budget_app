@@ -16,7 +16,7 @@ class Dashboard extends StatelessWidget {
     return StreamBuilder(
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
-        final bills = snapshot.data ?? List();
+        final bills = snapshot.data ?? List<Bill>();
         List categoriesList = categories.categories;
         return Center(
           child: Column(

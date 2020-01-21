@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return StreamBuilder(
       stream: database.watchAllBills(),
       builder: (context, snapshot) {
-        final bills = snapshot.data ?? List();
+        final bills = snapshot.data ?? List<Bill>();
         return CustomScrollView(
             slivers:<Widget>[
               DashboardSliver(
